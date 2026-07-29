@@ -117,3 +117,60 @@ footer {
 .sidebarClosed .active {
   justify-content: center;
 }
+
+@media (max-width: 768px) {
+  .sidebarOpen {
+    width: 220px;
+  }
+
+  .sidebarClosed {
+    width: 0;
+    padding: 0;
+    overflow: hidden;
+  }
+}
+
+/* svg */
+
+.btn svg,
+.active svg {
+  width: 22px;
+  height: 22px;
+  flex-shrink: 0;
+}
+
+.sidebarClosed .btn svg,
+.sidebarClosed .active svg {
+  width: 24px;
+  height: 24px;
+}
+
+header button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  width: 40px;
+  height: 40px;
+
+  padding: 0;
+
+  border: none;
+  border-radius: 6px;
+
+  background-color: transparent;
+  color: #0f172a;
+
+  cursor: pointer;
+
+  transition: background-color 0.2s ease;
+}
+
+header button:hover {
+  background-color: #f1f5f9;
+}
+
+header button svg {
+  width: 24px;
+  height: 24px;
+}
