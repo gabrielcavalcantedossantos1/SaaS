@@ -1,4 +1,4 @@
-import { Link, Outlet } from "react-router-dom";
+import { NavLink, Outlet, Link } from "react-router-dom";
 import { useAppContext } from "../../context/AppContext";
 
 // style
@@ -15,10 +15,10 @@ export function Layout() {
                 <nav>
                     <ul>
                         <li>
-                            <Link to="/">Home</Link>
+                            <NavLink to="/" className={({ isActive }) => (isActive ? 'active' : 'btn')}>Home</NavLink>
                         </li>
                         <li>
-                            <Link to="/about">About</Link>
+                            <NavLink to="/about" className={({ isActive }) => (isActive ? 'active' : 'btn')}>About</NavLink>
                         </li>
                     </ul>
                 </nav>
@@ -28,7 +28,7 @@ export function Layout() {
 
                 {/* Este é o cabeçalho */}
                 <header>
-                    <Link to="/">{appName} - Seu app de estudos</Link>
+                    <Link to="/" className="btn">{appName} - Seu app de estudos</Link>
                 </header>
 
                 <main>
@@ -36,7 +36,7 @@ export function Layout() {
                 </main>
 
                 <footer>
-                    <p>&copy; 2023 {appName}. All rights reserved.</p>
+                    <p>&copy; 2026 {appName}. Todos os direitos reservados.</p>
                 </footer>
             </div>
         </div>
