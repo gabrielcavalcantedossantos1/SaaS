@@ -3,7 +3,8 @@ import { createContext, useContext, type ReactNode } from 'react'
 // contexto para o projeto de organização de estudos, fornecendo informações globais sobre o aplicativo, como o nome do aplicativo.
 
 type AppContextType = {
-  appName: string
+  appName: string,
+  userName:string
 }
 
 const AppContext = createContext<AppContextType | undefined>(undefined)
@@ -11,6 +12,7 @@ const AppContext = createContext<AppContextType | undefined>(undefined)
 export function AppProvider({ children }: { children: ReactNode }) {
   const value: AppContextType = {
     appName: 'StudyFlow',
+    userName:"Gabriel"
   }
 
   return <AppContext.Provider value={value}>{children}</AppContext.Provider>
