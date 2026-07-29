@@ -21,7 +21,7 @@ export function AppProvider({ children }: { children: ReactNode }) {
         console.log(email, password)
     }
 
-    const [user, setUser] = useState<User | null>(null)
+    const [user] = useState<User | null>(null)
 
     const value: AuthContextType = {
         user,
