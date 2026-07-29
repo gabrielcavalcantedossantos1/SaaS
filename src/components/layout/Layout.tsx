@@ -3,7 +3,7 @@ import { useAppContext } from "../../context/AppContext";
 
 // style
 import './style.css'
-import { House, Info, Menu } from "lucide-react";
+import { House, Info, Menu, User } from "lucide-react";
 import { useState } from "react";
 
 
@@ -11,7 +11,7 @@ export function Layout() {
 
     const [isOpen, setIsOpen] = useState(true)
 
-    const { appName } = useAppContext();
+    const { appName, userName } = useAppContext();
     return (
         <div className="layout">
 
@@ -39,8 +39,17 @@ export function Layout() {
 
                 {/* Este é o cabeçalho */}
                 <header>
-                    <button onClick={() => setIsOpen(!isOpen)}><Menu /></button>
-                    <Link to="/" className="btn">{appName}</Link>
+                    <button onClick={() => setIsOpen(!isOpen)}>
+                        <Menu />
+                    </button>
+
+                    <div className="headerContent">
+                        <Link to="/" className="logo">
+                            {appName}
+                        </Link>
+
+                        <span><User />{userName}</span>
+                    </div>
                 </header>
 
                 <main>
