@@ -1,4 +1,5 @@
 import { useId } from "react"
+import './style.css'
 
 type InputType = {
     text: string,
