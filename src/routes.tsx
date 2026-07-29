@@ -1,16 +1,22 @@
 import { createBrowserRouter } from 'react-router-dom'
 import { HomePage } from './pages/HomePage'
 import { AboutPage } from './pages/AboutPage'
+import { Layout } from './components/Layout'
 
 const routes = createBrowserRouter([
   {
     path: '/',
-    element: <HomePage />,
-  },
-  {
-    path: '/about',
-    element: <AboutPage />,
-  },
+    element: <Layout />,
+    children: [
+      {
+        index: true,
+        element: <HomePage />,
+      }, {
+        path: '/about',
+        element: <AboutPage />,
+      }
+    ]
+  }
 ])
 
 export default routes
