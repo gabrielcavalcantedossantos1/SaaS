@@ -19,6 +19,24 @@ aside ul li {
   margin-bottom: 8px;
 }
 
+.sidebarOpen {
+    width: 240px;
+    min-height: 100vh;
+    padding: 20px;
+    background-color: #1e293b;
+
+    transition: width 0.3s ease;
+}
+
+.sidebarClosed {
+    width: 70px;
+    min-height: 100vh;
+    padding: 20px;
+    background-color: #1e293b;
+
+    transition: width 0.3s ease;
+}
+
 .btn,
 .active {
   display: block;
