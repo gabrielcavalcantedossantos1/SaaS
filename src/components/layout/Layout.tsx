@@ -17,8 +17,6 @@ export function Layout() {
 
             {/* Está é a barra lateral */}
             <aside className={isOpen ? "sidebarOpen" : "sidebarClosed"}>
-
-                <button onClick={() => setIsOpen(!isOpen)}><Menu /></button>
                 <nav>
                     <ul>
                         <li>
@@ -41,7 +39,8 @@ export function Layout() {
 
                 {/* Este é o cabeçalho */}
                 <header>
-                    <Link to="/" className="btn">{appName} - Seu app de estudos</Link>
+                    <button onClick={() => setIsOpen(!isOpen)}><Menu /></button>
+                    <Link to="/" className="btn">{appName}</Link>
                 </header>
 
                 <main>
