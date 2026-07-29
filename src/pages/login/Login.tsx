@@ -1,15 +1,24 @@
 import type { FormEvent } from "react";
-import { Input } from "../../components/input";
+import { Input } from "../../components/input/input";
+import { useAppContext } from "../../context/AppContext";
+
+import './style.css'
 
 export function Login() {
 
-    function handleSubmit(e:FormEvent){
+    const { appName } = useAppContext()
+
+    function handleSubmit(e: FormEvent) {
         e.preventDefault()
         console.log("O formulario foi enviado")
     }
     return (
         <div className="login">
-            <h1>Faça o login para desbloquear acesso ao app.</h1>
+
+            <h1>{appName}</h1>
+
+            <p>Seu app de estudos organizados</p>
+
 
             <form onSubmit={handleSubmit}>
                 <Input
