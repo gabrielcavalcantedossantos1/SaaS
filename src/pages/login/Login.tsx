@@ -1,5 +1,5 @@
 import type { FormEvent } from "react";
-import { Input } from "../input";
+import { Input } from "../../components/input";
 
 export function Login() {
 
