@@ -1,4 +1,6 @@
 import { createContext, useContext, useState, type ReactNode } from 'react'
+import { auth } from '../services/firebase'
+import { signInWithEmailAndPassword } from 'firebase/auth'
 
 // contexto para o projeto de organização de estudos, fornecendo informações globais sobre o aplicativo, como o nome do aplicativo.
 
@@ -19,13 +21,15 @@ const AuthContent = createContext<AuthContextType | undefined>(undefined)
 export function AppProvider({ children }: { children: ReactNode }) {
     const [user, setUser] = useState<User | null>(null)
 
-    function login(email: string, password: string) {
-        console.log(email, password)
+    async function login(email: string, password: string) {
+        const credential = await signInWithEmailAndPassword(auth, email, password)
+
+        const firebaseUser = credential.user
 
         setUser({
-            id: '1',
-            name: 'Gabriel',
-            email: email
+            id: firebaseUser.uid,
+            name: firebaseUser.displayName ?? "",
+            email: firebaseUser.email ?? ''
         })
     }
 
