@@ -4,7 +4,7 @@ import { useAppContext } from "../../context/AppContext";
 
 import './style.css'
 import { useAuth } from "../../context/AuthContent";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 export function Login() {
 
@@ -52,6 +52,8 @@ export function Login() {
 
                 <button type="submit">Entrar</button>
             </form>
+            <p>Ainda não está cadastrado?</p>
+            <Link to='/register'>Registre-se</Link>
         </div>
     )
 }
