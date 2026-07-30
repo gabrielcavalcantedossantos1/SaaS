@@ -1,23 +1,21 @@
-import { useId, type ChangeEvent } from "react"
-import './style.css'
+import { useId, type InputHTMLAttributes } from "react"
+import "./style.css"
 
-type InputType = {
-    text: string,
-    type?: string,
-    placeholder: string,
-    name: string,
-    onChange: (e: ChangeEvent<HTMLInputElement>) => void,
-    value: string
+type InputType = InputHTMLAttributes<HTMLInputElement> & {
+    text: string
 }
 
-export function Input({ name, placeholder, text, type, onChange, value }: InputType) {
-
+export function Input({ text, ...props }: InputType) {
     const id = useId()
 
     return (
         <div>
             <label htmlFor={id}>{text}</label>
-            <input type={type ?? 'text'} id={id} placeholder={placeholder} name={name} value={value} onChange={onChange} />
+
+            <input
+                id={id}
+                {...props}
+            />
         </div>
     )
 }
