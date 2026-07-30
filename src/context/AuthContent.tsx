@@ -11,6 +11,7 @@ type User = {
 type AuthContextType = {
     user: User | null
     login: (email: string, password: string) => void
+    logout: () => void
 }
 
 const AuthContent = createContext<AuthContextType | undefined>(undefined)
@@ -28,10 +29,15 @@ export function AppProvider({ children }: { children: ReactNode }) {
         })
     }
 
+    function logout() {
+        setUser(null)
+    }
+
 
     const value: AuthContextType = {
         user,
-        login
+        login,
+        logout
     }
     return <AuthContent.Provider value={value}>{children}</AuthContent.Provider>
 }
