@@ -13,7 +13,8 @@ import {
   updateProfile,
   onAuthStateChanged,
 } from "firebase/auth";
-import { Spinner } from "../components/spinner/Spinner";
+import { getAuthErrorMessage } from "../utils/firebaseErrors";
+import { notify } from "../services/toast";
 
 // Cria um contexto global de autenticação para compartilhar dados e ações entre componentes.
 // Esse contexto permite que qualquer parte da aplicação saiba quem está logado e execute ações como login, registro e logout.
@@ -71,6 +72,13 @@ export function AppProvider({ children }: { children: ReactNode }) {
         name: firebaseUser.displayName ?? "",
         email: firebaseUser.email ?? "",
       });
+
+      notify.success("Logado com sucesso!");
+    } catch (error) {
+      const errorMessage = getAuthErrorMessage(error);
+      notify.error(errorMessage);
+
+      throw error;
     } finally {
       setLoading(false);
     }
@@ -124,6 +132,13 @@ export function AppProvider({ children }: { children: ReactNode }) {
         name,
         email: firebaseUser.email ?? "",
       });
+
+      notify.success("Registrado com sucesso!");
+    } catch (error) {
+      const errorMessage = getAuthErrorMessage(error);
+      notify.error(errorMessage);
+
+      throw error;
     } finally {
       setLoading(false);
     }
@@ -136,6 +151,13 @@ export function AppProvider({ children }: { children: ReactNode }) {
     try {
       await signOut(auth);
       setUser(null);
+
+      notify.success("Deslogado com sucesso!");
+    } catch (error) {
+      const errorMessage = getAuthErrorMessage(error);
+      notify.error(errorMessage);
+
+      throw error;
     } finally {
       setLoading(false);
     }
