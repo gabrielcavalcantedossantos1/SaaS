@@ -1,6 +1,6 @@
-import { createContext, useContext, useState, type ReactNode } from 'react'
+import { createContext, useContext, useEffect, useState, type ReactNode } from 'react'
 import { auth } from '../services/firebase'
-import { createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut, updateProfile } from 'firebase/auth'
+import { createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut, updateProfile, onAuthStateChanged } from 'firebase/auth'
 
 // Cria um contexto global de autenticação para compartilhar dados e ações entre componentes.
 // Esse contexto permite que qualquer parte da aplicação saiba quem está logado e execute ações como login, registro e logout.
@@ -30,6 +30,8 @@ export function AppProvider({ children }: { children: ReactNode }) {
     // Estado que guarda o usuário autenticado atualmente.
     // Quando ninguém está logado, o valor é null.
     const [user, setUser] = useState<User | null>(null)
+    //Estado de carregamento
+    const [loading, setLoading] = useState(true)
 
     // Realiza login com email e senha usando o Firebase.
     async function login(email: string, password: string) {
@@ -46,6 +48,28 @@ export function AppProvider({ children }: { children: ReactNode }) {
             email: firebaseUser.email ?? ''
         })
     }
+
+    // funçao que verifica se o usuario esta authenticado ou não quando a paggina reinicia
+    useEffect(() => {
+        //esta const abaixo verifica se ha um usuario logado
+        const unsubscribe = onAuthStateChanged(auth, (firebaseUser) => {
+            if (firebaseUser) {
+                setUser({
+                    id: firebaseUser.uid,
+                    name: firebaseUser.displayName ?? "",
+                    email: firebaseUser.email ?? ''
+                })
+            } else {
+                //se nao achou um usuario ele se torna nulo
+                setUser(null)
+            }
+
+            //finalizando o carregamento
+            setLoading(false)
+        })
+
+        return () => unsubscribe()
+    }, [])
 
     // Cria uma nova conta com nome, email e senha.
     async function register(name: string, email: string, password: string) {
