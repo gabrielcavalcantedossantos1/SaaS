@@ -1,6 +1,19 @@
 .layout {
   display: flex;
+  flex-direction: row;
+  align-items: stretch;
+  width: 100%;
   min-height: 100vh;
+  flex-wrap: nowrap;
+}
+
+.layout > aside {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 10;
+  flex-shrink: 0;
+  height: 100vh;
 }
 
 /* sidebar */
@@ -15,8 +28,8 @@ aside ul li {
 
 .sidebarOpen {
   width: 240px;
-  min-height: 100vh;
   padding: 20px;
+  margin: 0;
   background-color: #1e293b;
 
   transition: width 0.3s ease;
@@ -24,8 +37,8 @@ aside ul li {
 
 .sidebarClosed {
   width: 70px;
-  min-height: 100vh;
   padding: 20px;
+  margin: 0;
   background-color: #1e293b;
 
   transition: width 0.3s ease;
@@ -74,12 +87,20 @@ aside ul li {
 }
 
 .content {
-  flex: 1;
-
+  flex: 1 1 auto;
+  width: 100%;
+  min-width: 0;
   display: flex;
   flex-direction: column;
+  min-height: 0;
+}
 
-  min-width: 0;
+.contentSidebarOpen {
+  margin-left: 240px;
+}
+
+.contentSidebarClosed {
+  margin-left: 70px;
 }
 
 .content header span {
@@ -113,7 +134,7 @@ header .btn:hover {
 /* main */
 
 main {
-  flex: 1;
+  flex: 1 1 auto;
   padding: 32px;
 }
 
