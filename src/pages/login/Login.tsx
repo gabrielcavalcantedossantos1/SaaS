@@ -4,7 +4,9 @@ import { useAppContext } from "../../context/AppContext";
 
 import './style.css'
 import { useAuth } from "../../context/AuthContent";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import { getAuthErrorMessage } from "../../utils/firebaseErrors";
+import { notify } from "../../services/toast";
 
 export function Login() {
 
@@ -16,12 +18,24 @@ export function Login() {
     const { appName } = useAppContext()
     const { login } = useAuth()
 
-    function handleSubmit(e: FormEvent) {
+    const [isSubmitting, setIsSubmitting] = useState(false)
+
+    async function handleSubmit(e: FormEvent) {
         e.preventDefault()
 
-        login(email, password)
+        if (!email.trim() || !password.trim()) return notify.error("Os campos E-mail e Senha devem ser preenchidos!")
+        setIsSubmitting(true)
 
-        navigate('/')
+        try {
+            await login(email, password)
+
+            navigate('/')
+        } catch (error) {
+            const errorMessage = getAuthErrorMessage(error)
+            notify.error(errorMessage)
+        } finally {
+            setIsSubmitting(false)
+        }
     }
     return (
         <div className="login">
@@ -50,8 +64,10 @@ export function Login() {
                     onChange={e => setPassword(e.target.value)}
                 />
 
-                <button type="submit">Entrar</button>
+                <button type="submit" disabled={isSubmitting}>{isSubmitting ? 'Entrando' : 'Entrar'}</button>
             </form>
+            <p>Ainda não está cadastrado?</p>
+            <Link to='/register'>Registre-se</Link>
         </div>
     )
 }

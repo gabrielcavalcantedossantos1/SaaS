@@ -1,4 +1,4 @@
-.login {
+.register {
     width: 100%;
     max-width: 400px;
     margin: 80px auto;
@@ -13,18 +13,18 @@
     background-color: #ffffff;
 }
 
-.login h1 {
+.register h1 {
     margin: 0;
     font-size: 28px;
     color: #111827;
 }
 
-.login p {
+.register p {
     margin: 8px 0 24px;
     color: #6b7280;
 }
 
-.login form {
+.register form {
     width: 100%;
 
     display: flex;
@@ -32,7 +32,7 @@
     gap: 16px;
 }
 
-.login button {
+.register button {
     width: 100%;
     height: 44px;
 
@@ -49,20 +49,20 @@
     transition: 0.2s;
 }
 
-.login button:hover {
+.register button:hover {
     background-color: #4f46e5;
 }
 
-.login button:active {
+.register button:active {
     transform: scale(0.98);
 }
 
-.login a {
+.register a {
     color: #6366f1;
     text-decoration: none;
     font-weight: 600;
 }
 
-.login a:hover {
+.register a:hover {
     text-decoration: underline;
 }
