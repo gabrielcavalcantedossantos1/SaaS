@@ -20,6 +20,7 @@ type AuthContextType = {
     login: (email: string, password: string) => Promise<void>
     logout: () => Promise<void>
     register: (name: string, email: string, password: string) => Promise<void>
+    loading: boolean
 }
 
 // Cria o contexto com um valor inicial indefinido.
@@ -107,7 +108,8 @@ export function AppProvider({ children }: { children: ReactNode }) {
         user,
         login,
         logout,
-        register
+        register,
+        loading
     }
 
     // Entrega o valor do contexto para todos os componentes filhos.
