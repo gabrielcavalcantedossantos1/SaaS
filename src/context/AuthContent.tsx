@@ -1,6 +1,7 @@
 import { createContext, useContext, useEffect, useState, type ReactNode } from 'react'
 import { auth } from '../services/firebase'
 import { createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut, updateProfile, onAuthStateChanged } from 'firebase/auth'
+import { Spinner } from '../components/spinner/Spinner'
 
 // Cria um contexto global de autenticação para compartilhar dados e ações entre componentes.
 // Esse contexto permite que qualquer parte da aplicação saiba quem está logado e execute ações como login, registro e logout.
@@ -97,6 +98,9 @@ export function AppProvider({ children }: { children: ReactNode }) {
         await signOut(auth)
         setUser(null)
     }
+
+    // se estiver em estado de carregamento carrega o componente spinner
+    if (loading) return <Spinner />
 
     // Objeto com todos os valores e funções que serão compartilhados pelo contexto.
     const value: AuthContextType = {
