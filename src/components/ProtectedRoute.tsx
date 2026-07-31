@@ -1,15 +1,15 @@
-import { Navigate, Outlet } from 'react-router-dom'
-import { useAuth } from '../context/AuthContent'
-import { Spinner } from './spinner/Spinner'
+import { Navigate, Outlet } from "react-router-dom";
+import { useAuth } from "../context/AuthContent";
+import { Spinner } from "./spinner/Spinner";
 
 export function ProtectedRoute() {
-    const { user, loading } = useAuth()
+  const { user, initialLoading } = useAuth();
 
-    if (loading) return <Spinner />
+  if (initialLoading) return <Spinner />;
 
-    if (!user) {
-        return <Navigate to="/login" replace />
-    }
+  if (!user) {
+    return <Navigate to="/login" replace />;
+  }
 
-    return <Outlet />
+  return <Outlet />;
 }
