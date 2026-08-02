@@ -2,7 +2,7 @@ import './style.css'
 
 type SummaryCardProps = {
     title: 'Total de Tarefas' | 'Tarefas Completadas' | 'Tarefas Pendentes' | 'Tarefas desta Semana'
-    value: string
+    value: number
 }
 
 export function SummaryCard({ title, value }: SummaryCardProps) {
