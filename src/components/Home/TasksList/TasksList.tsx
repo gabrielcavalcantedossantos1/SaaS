@@ -8,7 +8,7 @@ type Task = {
 
 type TasksListProps = {
     tasks: Task[]
-    title: string
+    title: 'Últimas Tarefas' | 'Próximas Tarefas'
 }
 
 export function TasksList({ tasks, title }: TasksListProps) {
@@ -17,12 +17,16 @@ export function TasksList({ tasks, title }: TasksListProps) {
             <h3>{title}</h3>
 
             <ul>
-                {tasks.map((task) => (
-                    <li key={task.id}>
-                        <h4>{task.title}</h4>
-                        <p>{task.description}</p>
-                    </li>
-                ))}
+                {tasks.length > 0 ? (
+                    tasks.map((task) => (
+                        <li key={task.id}>
+                            <h4>{task.title}</h4>
+                            <p>{task.description}</p>
+                        </li>
+                    ))
+                ) : (
+                    <li>Nenhuma tarefa encontrada.</li>
+                )}
             </ul>
 
         </section>)
