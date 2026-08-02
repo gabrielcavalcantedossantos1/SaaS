@@ -20,6 +20,8 @@
 
 aside ul {
   list-style: none;
+  padding: 0;
+  margin: 24px 0 0;
 }
 
 aside ul li {
@@ -30,8 +32,8 @@ aside ul li {
   width: 240px;
   padding: 20px;
   margin: 0;
-  background-color: #1e293b;
-
+  background: linear-gradient(180deg, #0f172a 0%, #1e293b 100%);
+  box-shadow: 4px 0 28px rgba(15, 23, 42, 0.28);
   transition: width 0.3s ease;
 }
 
@@ -39,9 +41,24 @@ aside ul li {
   width: 70px;
   padding: 20px;
   margin: 0;
-  background-color: #1e293b;
-
+  background: linear-gradient(180deg, #0f172a 0%, #1e293b 100%);
+  box-shadow: 4px 0 28px rgba(15, 23, 42, 0.28);
   transition: width 0.3s ease;
+}
+
+.sideLogo {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  text-decoration: none;
+  font-size: 1.25rem;
+  font-weight: 800;
+  color: #f8fafc;
+  letter-spacing: 0.03em;
+  padding: 10px 14px;
+  border-radius: 14px;
+  background: rgba(255, 255, 255, 0.08);
+  backdrop-filter: blur(8px);
 }
 
 .btn,
@@ -77,13 +94,12 @@ aside ul li {
 
 .headerContent {
   flex: 1;
-
   display: flex;
   align-items: center;
-  justify-content: space-between;
-
+  justify-content: flex-end;
   margin-left: 10px;
   margin: 0 20px;
+  min-width: 0;
 }
 
 .content {
@@ -111,14 +127,19 @@ aside ul li {
 /* header */
 
 header {
-  height: 64px;
+  height: 72px;
   padding: 0 32px;
-
   display: flex;
   align-items: center;
-
-  background-color: white;
+  justify-content: space-between;
+  gap: 16px;
+  background: linear-gradient(180deg, #ffffff 0%, #f8fbff 100%);
   border-bottom: 1px solid #e2e8f0;
+}
+
+.headerLeft {
+  display: flex;
+  align-items: center;
 }
 
 header .btn {
@@ -129,6 +150,49 @@ header .btn {
 
 header .btn:hover {
   background-color: transparent;
+}
+
+.userInfo {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 10px;
+  padding: 6px 10px;
+  border-radius: 999px;
+  background: linear-gradient(135deg, #eff6ff 0%, #ffffff 100%);
+  border: 1px solid #dbeafe;
+  box-shadow: 0 6px 18px rgba(37, 99, 235, 0.12);
+  max-width: 240px;
+}
+
+.userAvatar {
+  width: 32px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #2563eb 0%, #38bdf8 100%);
+  color: #ffffff;
+  flex-shrink: 0;
+}
+
+.userDetails {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  min-width: 0;
+}
+
+.userName {
+  display: inline-block;
+  max-width: 140px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  font-size: 0.9rem;
+  font-weight: 700;
+  color: #0f172a;
 }
 
 /* main */
