@@ -1,7 +1,7 @@
 import './style.css'
 
 type SummaryCardProps = {
-    title: 'Total de Tarefas' | 'Tarefas Completadas' | 'Tarefas Pendentes' | 'Tarefas desta Semana'
+    title: string
     value: number
 }
 
