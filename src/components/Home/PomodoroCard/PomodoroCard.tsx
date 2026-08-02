@@ -36,7 +36,7 @@ export function PomodoroCard() {
 
     return (
         <section className="pomodoroCard">
-            <h2>Pomodoro</h2>
+            <h2>🍅 Pomodoro</h2>
             <div className="timer">
                 <time>{formatTime(time)}</time>
             </div>
