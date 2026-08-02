@@ -7,11 +7,11 @@ type SummaryCardProps = {
 
 export function SummaryCard({ title, value }: SummaryCardProps) {
     return (
-        <div className="summaryCard">
+        <section className="summaryCard">
             <span>{value}</span>
 
             <h2>{title}</h2>
-        </div>
+        </section>
     )
 }
 
