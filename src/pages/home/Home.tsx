@@ -1,3 +1,6 @@
+import { PomodoroCard } from "../../components/Home/PomodoroCard/PomodoroCard";
+import { SummaryCard } from "../../components/Home/SummaryCard/SummaryCard";
+import { TasksList } from "../../components/Home/TasksList/TasksList";
 import { useAppContext } from "../../context/AppContext";
 import './styles.css'
 
@@ -24,11 +27,34 @@ export function Home() {
     thisWeekTasks: 3
   };
 
+  const summaryCardsData = [
+    {
+      title: "Total de Tarefas",
+      value: fictitiousSummary.totalTasks,
+    },
+    {
+      title: "Tarefas Completadas",
+      value: fictitiousSummary.completedTasks,
+    },
+    {
+      title: "Tarefas Pendentes",
+      value: fictitiousSummary.pendingTasks,
+    },
+    {
+      title: "Tarefas desta Semana",
+      value: fictitiousSummary.thisWeekTasks,
+    }
+  ]
+
   const fictitiousTasks = [
     {
       id: 1,
       title: "Tarefa 1",
       description: "Descrição da tarefa 1"
+    }, {
+      id: 2,
+      title: "Tarefa 2",
+      description: "Descrição da tarefa 2"
     }
   ];
 
@@ -46,43 +72,24 @@ export function Home() {
       <main>
         <section className="resumo">
           <h3>Resumo</h3>
-          <ul>
-            <li>Total de Tarefas: {fictitiousSummary.totalTasks}</li>
-            <li>Tarefas Completadas: {fictitiousSummary.completedTasks}</li>
-            <li>Tarefas Pendentes: {fictitiousSummary.pendingTasks}</li>
-            <li>Tarefas desta Semana: {fictitiousSummary.thisWeekTasks}</li>
-          </ul>
-          <h5>Meta semanal: 8h / 15h</h5>
+          {summaryCardsData.map((i) => (
+            <SummaryCard key={i.title} title={i.title} value={i.value} />
+          ))}
+
         </section>
 
 
         <section className="nextTasks">
-          <h3>Próximas Tarefas</h3>
-          <ul>
-            {fictitiousTasks.map((task) => (
-              <li key={task.id}>
-                <h4>{task.title}</h4>
-                <p>{task.description}</p>
-              </li>
-            ))}
-          </ul>
+          <TasksList title="Próximas Tarefas" tasks={fictitiousTasks} />
         </section>
 
         <section className="pomodoro">
-          <h3>Pomodoro</h3>
-          <p>Temporizador para sessões de estudo</p>
+          <PomodoroCard />
         </section>
 
         <section className="lastTasks">
-          <h3>Últimas Tarefas</h3>
-          <ul>
-            {fictitiousTasks.map((task) => (
-              <li key={task.id}>
-                <h4>{task.title}</h4>
-                <p>{task.description}</p>
-              </li>
-            ))}
-          </ul>
+          <TasksList title='Últimas Tarefas' tasks={fictitiousTasks} />
+
         </section>
       </main>
     </div>
