@@ -1,0 +1,78 @@
+.tasksContainer {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+
+    padding: 24px;
+}
+
+
+.tasksHeader {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+
+.tasksHeader h1 {
+    font-size: 32px;
+    margin-bottom: 8px;
+}
+
+
+.tasksHeader p {
+    color: #64748b;
+}
+
+
+.tasksHeader button {
+    padding: 12px 20px;
+
+    border: none;
+    border-radius: 8px;
+
+    background: #2563eb;
+    color: white;
+
+    font-weight: 600;
+
+    cursor: pointer;
+
+    transition: .2s;
+}
+
+
+.tasksHeader button:hover {
+    filter: brightness(.9);
+}
+
+
+/* Pesquisa */
+
+.search input {
+    width: 100%;
+
+    padding: 14px 16px;
+
+    border-radius: 10px;
+    border: 1px solid #cbd5e1;
+
+    font-size: 16px;
+
+    outline: none;
+}
+
+
+.search input:focus {
+    border-color: #2563eb;
+}
+
+
+/* Lista */
+
+.tasksList {
+    display: flex;
+    flex-direction: column;
+
+    gap: 16px;
+}
