@@ -3,7 +3,6 @@ import './styles.css'
 import { useNavigate } from 'react-router-dom'
 import { createStudy } from '../../../services/studies'
 import { useAuth } from '../../../context/AuthContent'
-import { FirebaseError } from 'firebase/app'
 import { getAuthErrorMessage } from '../../../utils/firebaseErrors'
 import { notify } from '../../../services/toast'
 
