@@ -14,19 +14,20 @@ import {
   updateDoc,
   doc,
   deleteDoc,
+  onSnapshot,
 } from "firebase/firestore";
 import { db } from "./firebase";
 
 const COLLECTION_NAME = "studies";
 
+const buildUserStudiesQuery = (userId: string) =>
+  query(collection(db, COLLECTION_NAME), where("userId", "==", userId));
+
 // Busca os estudos do usuário
 export async function getStudiesByUser(
   userId: string
 ): Promise<StudyItem[]> {
-  const q = query(
-    collection(db, COLLECTION_NAME),
-    where("userId", "==", userId)
-  );
+  const q = buildUserStudiesQuery(userId);
 
   const querySnapshot = await getDocs(q);
 
@@ -34,6 +35,22 @@ export async function getStudiesByUser(
     id: docSnap.id,
     ...docSnap.data(),
   })) as StudyItem[];
+}
+
+export function listenToStudiesByUser(
+  userId: string,
+  onChange: (studies: StudyItem[]) => void
+) {
+  const q = buildUserStudiesQuery(userId);
+
+  return onSnapshot(q, (querySnapshot) => {
+    const studies = querySnapshot.docs.map((docSnap) => ({
+      id: docSnap.id,
+      ...docSnap.data(),
+    })) as StudyItem[];
+
+    onChange(studies);
+  });
 }
 
 // Atualiza o status

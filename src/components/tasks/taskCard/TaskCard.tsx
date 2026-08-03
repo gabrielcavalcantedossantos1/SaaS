@@ -1,21 +1,15 @@
+import type { StudyItem } from '../../../types/study'
 import './styles.css'
 
-type Task = {
-    id: number,
-    title: string,
-    description: string,
-    completed: boolean
-}
-
 type TaskCardProps = {
-    task: Task
+    task: StudyItem
 }
 
 export function TaskCard({ task }: TaskCardProps) {
     return (
         <article className="taskCard">
             <div className="taskInfo">
-                <input type="checkbox" checked={task.completed} readOnly />
+                <input type="checkbox" checked={task.status === 'done'} readOnly />
 
                 <div>
                     <h3>{task.title}</h3>

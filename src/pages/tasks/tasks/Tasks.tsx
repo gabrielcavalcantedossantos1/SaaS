@@ -2,28 +2,31 @@ import { useNavigate } from 'react-router-dom'
 import { TaskCard } from '../../../components/tasks/taskCard/TaskCard'
 import './styles.css'
 
+import { listenToStudiesByUser } from '../../../services/studies'
+import type { StudyItem } from '../../../types/study'
+import { useAuth } from '../../../context/AuthContent'
+import { useEffect, useState } from 'react'
+
 export function Tasks() {
+
+    const { user } = useAuth()
+
+    const [tasks, setTasks] = useState<StudyItem[]>([])
+
+    useEffect(() => {
+        if (!user) {
+            setTasks([])
+            return
+        }
+
+        const unsubscribe = listenToStudiesByUser(user.id, setTasks)
+
+        return () => unsubscribe()
+    }, [user])
 
     const navigate = useNavigate()
 
-    const fictitiousTasks = [
-        {
-            id: 1,
-            title: 'Estudar React',
-            description: 'Estudar React para aprender a criar aplicações web',
-            completed: false
-        }, {
-            id: 2,
-            title: 'Estudar TypeScript',
-            description: 'Estudar TypeScript para aprender a criar aplicações web',
-            completed: false
-        }, {
-            id: 3,
-            title: 'Estudar JavaScript',
-            description: 'Estudar JavaScript para aprender a criar aplicações web',
-            completed: false
-        }
-    ]
+
     return (
         <div className="tasksContainer">
             <header className="tasksHeader">
@@ -42,7 +45,7 @@ export function Tasks() {
             </div>
 
             <main className="tasksList">
-                {fictitiousTasks.map((task) => (
+                {tasks.map((task) => (
                     <TaskCard key={task.id} task={task} />
                 ))}
             </main>
