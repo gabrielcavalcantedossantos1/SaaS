@@ -1,12 +1,20 @@
-// Define os três estados possíveis de um tópico de estudo
-export type StudyStatus = 'todo' | 'done' | 'difficult'
+export type StudyStatus = "todo" | "done" | "difficult";
 
-// Define a estrutura de um item de estudo salvo no Firestore
 export type StudyItem = {
-    id: string
-    userId: string
-    title: string
-    subject: string
-    status: StudyStatus
-    createdAt?: Date
-}
+  id: string;
+  userId: string;
+  title: string;
+  description: string;
+  category: "trabalho" | "estudo" | "pessoal";
+  priority: "baixa" | "media" | "alta";
+  status: StudyStatus;
+  createdAt?: Date;
+};
+
+export type CreateStudyData = {
+  userId: string;
+  title: string;
+  description: string;
+  category: "trabalho" | "estudo" | "pessoal";
+  priority: "baixa" | "media" | "alta";
+};

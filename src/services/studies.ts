@@ -1,4 +1,8 @@
-import type { StudyItem, StudyStatus } from "../types/study";
+import type {
+  StudyItem,
+  StudyStatus,
+  CreateStudyData,
+} from "../types/study";
 
 import {
   collection,
@@ -15,56 +19,48 @@ import { db } from "./firebase";
 
 const COLLECTION_NAME = "studies";
 
-//busca no firestore os topicos de estudo
-export async function getStudiesByUser(userId: string): Promise<StudyItem[]> {
-  //busca e consulta filtrando pelo userId
+// Busca os estudos do usuário
+export async function getStudiesByUser(
+  userId: string
+): Promise<StudyItem[]> {
   const q = query(
     collection(db, COLLECTION_NAME),
-    where("userId", "==", userId),
+    where("userId", "==", userId)
   );
 
-  //consulta e recebe dados do banco
   const querySnapshot = await getDocs(q);
 
-  //transform a busca em um objeto
-  const studies = querySnapshot.docs.map((docSnap) => ({
+  return querySnapshot.docs.map((docSnap) => ({
     id: docSnap.id,
     ...docSnap.data(),
   })) as StudyItem[];
-
-  return studies;
 }
 
-// muda uma atividade de estudo expecifica
+// Atualiza o status
 export async function updateStudyStatus(
   id: string,
-  status: StudyStatus,
+  status: StudyStatus
 ): Promise<void> {
   const docRef = doc(db, COLLECTION_NAME, id);
 
   await updateDoc(docRef, {
-    status: status,
+    status,
   });
 }
 
-// funçao para apagar uma materia
+// Exclui
 export async function deleteStudy(id: string): Promise<void> {
   const docRef = doc(db, COLLECTION_NAME, id);
   await deleteDoc(docRef);
 }
 
-// funçao para criar uma materia
-export async function createStudy(
-  userId: string,
-  title: string,
-  subject: string,
-): Promise<string> {
+// Cria uma tarefa
+export async function createStudy(data: CreateStudyData): Promise<string> {
   const docRef = await addDoc(collection(db, COLLECTION_NAME), {
-    userId,
-    title,
-    subject,
+    ...data,
     status: "todo",
     createdAt: serverTimestamp(),
   });
+
   return docRef.id;
 }
