@@ -1,6 +1,8 @@
 import { useState } from 'react'
 import './styles.css'
 import { useNavigate } from 'react-router-dom'
+import { createStudy } from '../../../services/studies'
+import { useAuth } from '../../../context/AuthContent'
 
 type Category = 'trabalho' | 'estudo' | 'pessoal'
 type Priority = 'baixa' | 'media' | 'alta'
@@ -9,23 +11,26 @@ export function NewTasks() {
 
     const navigate = useNavigate()
 
+    const { user } = useAuth()
+
     const [title, setTitle] = useState('')
     const [description, setDescription] = useState('')
     const [category, setCategory] = useState<Category | ''>('')
     const [priority, setPriority] = useState<Priority | ''>('')
 
-    function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
+
+    async function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
         event.preventDefault()
-        
-        const newTask = {
+
+        if (!user) return
+
+        await createStudy({
+            userId: user.id,
             title,
             description,
-            category,
-            priority,
-            completed: false
-        }
-
-        console.log('Nova tarefa criada:', newTask)
+            category: category as Category,
+            priority: priority as Priority
+        })
         navigate('/tasks')
     }
 
