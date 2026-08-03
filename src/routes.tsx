@@ -6,6 +6,7 @@ import { ProtectedRoute } from "./components/ProtectedRoute";
 import { Register } from "./pages/register/Register";
 import { Home } from "./pages/home/Home";
 import { Tasks } from "./pages/tasks/tasks/Tasks";
+import { NewTasks } from "./pages/tasks/newTaks/NewTasks";
 
 const routes = createBrowserRouter([
   {
@@ -34,7 +35,10 @@ const routes = createBrowserRouter([
           {
             path: "tasks",
             element: <Tasks />,
-          },
+          },{
+            path: "tasks/new",
+            element: <NewTasks />,
+          }
         ],
       },
     ],
