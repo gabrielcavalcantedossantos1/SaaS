@@ -5,7 +5,7 @@ import { Login } from "./pages/login/Login";
 import { ProtectedRoute } from "./components/ProtectedRoute";
 import { Register } from "./pages/register/Register";
 import { Home } from "./pages/home/Home";
-import { Tasks } from "./pages/tasks/Tasks";
+import { Tasks } from "./pages/tasks/tasks/Tasks";
 
 const routes = createBrowserRouter([
   {

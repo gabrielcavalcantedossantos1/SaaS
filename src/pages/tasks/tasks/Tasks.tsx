@@ -1,4 +1,4 @@
-import { TaskCard } from '../../components/tasks/taskCard/TaskCard'
+import { TaskCard } from '../../../components/tasks/taskCard/TaskCard'
 import './styles.css'
 
 export function Tasks() {
