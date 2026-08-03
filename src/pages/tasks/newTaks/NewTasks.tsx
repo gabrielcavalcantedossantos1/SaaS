@@ -3,6 +3,9 @@ import './styles.css'
 import { useNavigate } from 'react-router-dom'
 import { createStudy } from '../../../services/studies'
 import { useAuth } from '../../../context/AuthContent'
+import { FirebaseError } from 'firebase/app'
+import { getAuthErrorMessage } from '../../../utils/firebaseErrors'
+import { notify } from '../../../services/toast'
 
 type Category = 'trabalho' | 'estudo' | 'pessoal'
 type Priority = 'baixa' | 'media' | 'alta'
@@ -20,18 +23,31 @@ export function NewTasks() {
 
 
     async function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
-        event.preventDefault()
+        event.preventDefault();
 
-        if (!user) return
+        if (!user) return;
 
-        await createStudy({
-            userId: user.id,
-            title,
-            description,
-            category: category as Category,
-            priority: priority as Priority
-        })
-        navigate('/tasks')
+        try {
+            await createStudy({
+                userId: user.id,
+                title,
+                description,
+                category: category as Category,
+                priority: priority as Priority,
+            });
+
+            notify.success('Tarefa criada com sucesso!');
+
+            setCategory('');
+            setDescription('');
+            setPriority('');
+            setTitle('');
+
+            navigate("/tasks");
+        } catch (error) {
+            const errorMessage = getAuthErrorMessage(error)
+            notify.error(errorMessage)
+        }
     }
 
     return (<div className="newTaskContainer">
