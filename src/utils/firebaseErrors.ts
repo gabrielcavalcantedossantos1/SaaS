@@ -30,3 +30,22 @@ export function getAuthErrorMessage(error: unknown): string {
 
   return "Ocorreu um erro inesperado.";
 }
+
+export function getFirebaseErrorMessage(error: unknown): string {
+  if (error instanceof FirebaseError) {
+    switch (error.code) {
+      case "permission-denied":
+        return "Sem permissão para salvar a tarefa. Verifique as regras do Firestore.";
+      case "unavailable":
+        return "O serviço do Firestore está indisponível no momento. Tente novamente.";
+      case "deadline-exceeded":
+        return "A operação demorou demais para responder. Tente novamente.";
+      case "network-request-failed":
+        return "Sem conexão com a internet. Verifique sua rede.";
+      default:
+        return "Não foi possível criar a tarefa. Tente novamente.";
+    }
+  }
+
+  return "Não foi possível criar a tarefa. Tente novamente.";
+}
