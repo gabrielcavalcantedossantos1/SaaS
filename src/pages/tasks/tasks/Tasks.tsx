@@ -1,7 +1,10 @@
+import { useNavigate } from 'react-router-dom'
 import { TaskCard } from '../../../components/tasks/taskCard/TaskCard'
 import './styles.css'
 
 export function Tasks() {
+
+    const navigate = useNavigate()
 
     const fictitiousTasks = [
         {
@@ -29,7 +32,9 @@ export function Tasks() {
                     <p>Organize seus estudos e acompanhe seu progresso</p>
                 </div>
 
-                <button type='button'>+ Nova Tarefa</button>
+                <button type='button' onClick={() => navigate('/tasks/new')}>
+                    + Nova Tarefa
+                </button>
             </header>
 
             <div className="search">
