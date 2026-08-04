@@ -66,7 +66,7 @@ export function NewTasks() {
                 <textarea required id="description" placeholder="Ex: Estudar React para aprender a criar aplicações web" value={description} onChange={(e) => setDescription(e.target.value)} />
             </div>
 
-            <div>
+            <div className="formRow"><div>
                 <label htmlFor="category">Categoria</label>
                 <select required name="category" id="category" value={category} onChange={(e) => setCategory(e.target.value as Category)}>
                     <option value="" >Selecione uma categoria</option>
@@ -76,15 +76,15 @@ export function NewTasks() {
                 </select>
             </div>
 
-            <div>
-                <label htmlFor="priority">Prioridade</label>
-                <select required name="priority" id="priority" value={priority} onChange={(e) => setPriority(e.target.value as Priority)}>
-                    <option value="" >Selecione uma prioridade</option>
-                    <option value="baixa">Baixa</option>
-                    <option value="media">Média</option>
-                    <option value="alta">Alta</option>
-                </select>
-            </div>
+                <div>
+                    <label htmlFor="priority">Prioridade</label>
+                    <select required name="priority" id="priority" value={priority} onChange={(e) => setPriority(e.target.value as Priority)}>
+                        <option value="" >Selecione uma prioridade</option>
+                        <option value="baixa">Baixa</option>
+                        <option value="media">Média</option>
+                        <option value="alta">Alta</option>
+                    </select>
+                </div></div>
 
             <div className="actions">
                 <button type='button' onClick={() => navigate('/tasks')}>Cancelar</button>
