@@ -1,0 +1,120 @@
+.newTaskContainer {
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.newTaskContainer header {
+  margin-bottom: 32px;
+}
+
+.newTaskContainer h1 {
+  font-size: 2rem;
+  color: #0f172a;
+  margin-bottom: 8px;
+}
+
+.newTaskContainer header p {
+  color: #64748b;
+  font-size: 15px;
+}
+
+.newTaskContainer form {
+  background: #fff;
+  border: 1px solid #e2e8f0;
+  border-radius: 16px;
+  padding: 32px;
+
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+}
+
+.newTaskContainer form div {
+  display: flex;
+  flex-direction: column;
+}
+
+.newTaskContainer label {
+  margin-bottom: 8px;
+  font-weight: 600;
+  color: #334155;
+}
+
+.newTaskContainer input,
+.newTaskContainer textarea,
+.newTaskContainer select {
+  width: 100%;
+  padding: 12px 16px;
+
+  border: 1px solid #cbd5e1;
+  border-radius: 10px;
+
+  font-size: 15px;
+
+  transition: .2s;
+}
+
+.newTaskContainer textarea {
+  min-height: 130px;
+  resize: vertical;
+}
+
+.newTaskContainer input:focus,
+.newTaskContainer textarea:focus,
+.newTaskContainer select:focus {
+  outline: none;
+  border-color: #2563eb;
+  box-shadow: 0 0 0 3px rgba(37, 99, 235, .15);
+}
+
+.actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 16px;
+  margin-top: 12px;
+}
+
+.actions button {
+  padding: 12px 24px;
+  border-radius: 10px;
+  border: none;
+
+  cursor: pointer;
+
+  font-size: 15px;
+  font-weight: 600;
+
+  transition: .2s;
+}
+
+.actions button:first-child {
+  background: #e2e8f0;
+  color: #334155;
+}
+
+.actions button:first-child:hover {
+  background: #cbd5e1;
+}
+
+.actions button:last-child {
+  background: #2563eb;
+  color: white;
+}
+
+.actions button:last-child:hover {
+  background: #1d4ed8;
+}
+
+.formRow {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+}
+
+@media (max-width: 768px) {
+  .formRow {
+    grid-template-columns: 1fr;
+  }
+}
