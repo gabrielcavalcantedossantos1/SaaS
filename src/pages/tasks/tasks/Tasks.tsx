@@ -16,6 +16,7 @@ export function Tasks() {
     const [statusFilter, setStatusFilter] = useState("all");
     const [categoryFilter, setCategoryFilter] = useState("all");
     const [priorityFilter, setPriorityFilter] = useState("all");
+    const [sortBy, setSortBy] = useState("recent");
 
     useEffect(() => {
         if (!user) {
@@ -43,6 +44,33 @@ export function Tasks() {
         return matchesSeacrh && matchesStatus && matchesCategory && matchesPriority
     })
 
+    const getCreatedAtTime = (value?: StudyItem['createdAt']) => {
+        if (!value) return 0
+
+        const timestampLike = value as unknown as { toDate?: () => Date }
+
+        if (typeof timestampLike.toDate === 'function') {
+            return timestampLike.toDate().getTime()
+        }
+
+        return new Date(value).getTime()
+    }
+
+    const sortedTasks = [...filteredTasks].sort((a, b) => {
+        switch (sortBy) {
+            case "recent":
+                return getCreatedAtTime(b.createdAt) - getCreatedAtTime(a.createdAt)
+            case "oldest":
+                return getCreatedAtTime(a.createdAt) - getCreatedAtTime(b.createdAt)
+            case "priority":
+                const priorityOrder = { alta: 3, media: 2, baixa: 1 };
+                return priorityOrder[b.priority] - priorityOrder[a.priority];
+            case "alphabetical":
+                return a.title.localeCompare(b.title);
+            default:
+                return 0;
+        }
+    });
 
     return (
         <div className="tasksContainer">
@@ -95,14 +123,24 @@ export function Tasks() {
                     <option value="media">Média</option>
                     <option value="alta">Alta</option>
                 </select>
+
+                <select
+                    value={sortBy}
+                    onChange={(e) => setSortBy(e.target.value)}
+                >
+                    <option value="recent">Mais recentes</option>
+                    <option value="oldest">Mais antigas</option>
+                    <option value="priority">Prioridade</option>
+                    <option value="alphabetical">A-Z</option>
+                </select>
             </div>
 
             <main className="tasksList">
-                {filteredTasks.map((task) => (
+                {sortedTasks.map((task) => (
                     <TaskCard key={task.id} task={task} />
                 ))}
 
-                {filteredTasks.length === 0 && (
+                {sortedTasks.length === 0 && (
                     <p className="noTasks">
                         {tasks.length === 0
                             ? "📋 Você ainda não possui tarefas."
