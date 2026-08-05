@@ -12,6 +12,7 @@ export function Tasks() {
     const { user } = useAuth()
 
     const [tasks, setTasks] = useState<StudyItem[]>([])
+    const [search, setSearch] = useState('')
 
     useEffect(() => {
         if (!user) {
@@ -41,13 +42,21 @@ export function Tasks() {
             </header>
 
             <div className="search">
-                <input type="text" placeholder='Pesquisar tarefa...' />
+                <input 
+                    type="text" 
+                    placeholder='Pesquisar tarefa...' 
+                    value={search}
+                    onChange={(e) => setSearch(e.target.value)}
+                />
             </div>
 
             <main className="tasksList">
-                {tasks.map((task) => (
+                {tasks.filter((task) => 
+                    task.title.toLowerCase().includes(search.toLowerCase()) ||
+                    task.description.toLowerCase().includes(search.toLowerCase())
+                ).map((task) => (
                     <TaskCard key={task.id} task={task} />
-                ))}
+                ))} {!tasks.length && <p className='noTasks'>Nenhuma tarefa encontrada</p>}
             </main>
         </div>
     )
