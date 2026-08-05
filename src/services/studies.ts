@@ -1,8 +1,4 @@
-import type {
-  StudyItem,
-  StudyStatus,
-  CreateStudyData,
-} from "../types/study";
+import type { StudyItem, StudyStatus, CreateStudyData } from "../types/study";
 
 import {
   collection,
@@ -24,9 +20,7 @@ const buildUserStudiesQuery = (userId: string) =>
   query(collection(db, COLLECTION_NAME), where("userId", "==", userId));
 
 // Busca os estudos do usuário
-export async function getStudiesByUser(
-  userId: string
-): Promise<StudyItem[]> {
+export async function getStudiesByUser(userId: string): Promise<StudyItem[]> {
   const q = buildUserStudiesQuery(userId);
 
   const querySnapshot = await getDocs(q);
@@ -39,7 +33,7 @@ export async function getStudiesByUser(
 
 export function listenToStudiesByUser(
   userId: string,
-  onChange: (studies: StudyItem[]) => void
+  onChange: (studies: StudyItem[]) => void,
 ) {
   const q = buildUserStudiesQuery(userId);
 
@@ -56,13 +50,22 @@ export function listenToStudiesByUser(
 // Atualiza o status
 export async function updateStudyStatus(
   id: string,
-  status: StudyStatus
+  status: StudyStatus,
 ): Promise<void> {
   const docRef = doc(db, COLLECTION_NAME, id);
 
   await updateDoc(docRef, {
     status,
   });
+}
+
+// funçao para editar a tarefa
+export async function updateStudy(
+  id: string,
+  data: Partial<CreateStudyData>,
+): Promise<void> {
+  const docRef = doc(db, COLLECTION_NAME, id);
+  await updateDoc(docRef, data);
 }
 
 // Exclui
