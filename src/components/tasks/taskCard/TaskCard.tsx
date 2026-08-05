@@ -42,7 +42,7 @@ export function TaskCard({ task }: TaskCardProps) {
     }
 
     return (
-        <article className="taskCard">
+        <article className={`taskCard ${task.status === 'done' ? 'completed': '' }`}>
             <div className="taskInfo">
                 <input type="checkbox" checked={task.status === 'done'} onChange={handleToggleStatus} />
 
