@@ -14,6 +14,7 @@ import {
   getDoc,
 } from "firebase/firestore";
 import { db } from "./firebase";
+import type { DashboardData } from "../types/dashboardData";
 
 const COLLECTION_NAME = "studies";
 
@@ -100,4 +101,17 @@ export async function createStudy(data: CreateStudyData): Promise<string> {
   });
 
   return docRef.id;
+}
+
+// funçao para buscar o dashboard data
+export function getDashboardData(studies: StudyItem[]): DashboardData {
+  return {
+    totalTasks: studies.length,
+    completedTasks: studies.filter((study) => study.status === "done").length,
+    pendingTasks: studies.filter((study) => study.status === "todo").length,
+    difficultTasks: studies.filter((study) => study.status === "difficult")
+      .length,
+    highPriorityTasks: studies.filter((study) => study.priority === "alta")
+      .length,
+  };
 }
