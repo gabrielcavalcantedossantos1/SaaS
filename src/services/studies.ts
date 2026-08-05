@@ -11,6 +11,7 @@ import {
   doc,
   deleteDoc,
   onSnapshot,
+  getDoc,
 } from "firebase/firestore";
 import { db } from "./firebase";
 
@@ -66,6 +67,22 @@ export async function updateStudy(
 ): Promise<void> {
   const docRef = doc(db, COLLECTION_NAME, id);
   await updateDoc(docRef, data);
+}
+
+//funçao para buscar uma tarefa pelo id
+export async function getStudyById(id: string): Promise<StudyItem | null> {
+  const docRef = doc(db, COLLECTION_NAME, id);
+
+  const docSnap = await getDoc(docRef);
+
+  if (!docSnap.exists()) {
+    return null;
+  }
+
+  return {
+    id: docSnap.id,
+    ...docSnap.data(),
+  } as StudyItem;
 }
 
 // Exclui
