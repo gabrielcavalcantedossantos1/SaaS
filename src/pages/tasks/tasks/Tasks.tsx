@@ -13,6 +13,9 @@ export function Tasks() {
 
     const [tasks, setTasks] = useState<StudyItem[]>([])
     const [search, setSearch] = useState('')
+    const [statusFilter, setStatusFilter] = useState("all");
+    const [categoryFilter, setCategoryFilter] = useState("all");
+    const [priorityFilter, setPriorityFilter] = useState("all");
 
     useEffect(() => {
         if (!user) {
@@ -27,10 +30,18 @@ export function Tasks() {
 
     const navigate = useNavigate()
 
-    const filteredTasks = tasks.filter((task) =>
-        task.title.toLowerCase().includes(search.toLowerCase()) ||
-        task.description.toLowerCase().includes(search.toLowerCase())
-    )
+    const filteredTasks = tasks.filter((task) => {
+
+
+        const matchesSeacrh = task.title.toLowerCase().includes(search.toLowerCase()) ||
+            task.description.toLowerCase().includes(search.toLowerCase())
+
+        const matchesStatus = statusFilter === "all" || task.status === statusFilter
+        const matchesCategory = categoryFilter === "all" || task.category === categoryFilter
+        const matchesPriority = priorityFilter === "all" || task.priority === priorityFilter
+
+        return matchesSeacrh && matchesStatus && matchesCategory && matchesPriority
+    })
 
 
     return (
@@ -55,6 +66,37 @@ export function Tasks() {
                 />
             </div>
 
+            <div className="filters">
+                <select
+                    value={statusFilter}
+                    onChange={(e) => setStatusFilter(e.target.value)}
+                >
+                    <option value="all">Todos os status</option>
+                    <option value="todo">Pendente</option>
+                    <option value="done">Concluído</option>
+                </select>
+
+                <select
+                    value={categoryFilter}
+                    onChange={(e) => setCategoryFilter(e.target.value)}
+                >
+                    <option value="all">Todas as categorias</option>
+                    <option value="estudo">Estudo</option>
+                    <option value="trabalho">Trabalho</option>
+                    <option value="pessoal">Pessoal</option>
+                </select>
+
+                <select
+                    value={priorityFilter}
+                    onChange={(e) => setPriorityFilter(e.target.value)}
+                >
+                    <option value="all">Todas as prioridades</option>
+                    <option value="baixa">Baixa</option>
+                    <option value="media">Média</option>
+                    <option value="alta">Alta</option>
+                </select>
+            </div>
+
             <main className="tasksList">
                 {filteredTasks.map((task) => (
                     <TaskCard key={task.id} task={task} />
@@ -62,9 +104,9 @@ export function Tasks() {
 
                 {filteredTasks.length === 0 && (
                     <p className="noTasks">
-                        {search
-                            ? "🔍 Nenhuma tarefa encontrada para esta pesquisa."
-                            : "📋 Você ainda não possui tarefas."}
+                        {tasks.length === 0
+                            ? "📋 Você ainda não possui tarefas."
+                            : "🔍 Nenhuma tarefa corresponde aos filtros aplicados."}
                     </p>
                 )}
             </main>
