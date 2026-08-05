@@ -1,13 +1,8 @@
+import type { StudyItem } from '../../../types/study'
 import './style.css'
 
-type Task = {
-    id: number
-    title: string
-    description: string
-}
-
 type TasksListProps = {
-    tasks: Task[]
+    tasks: StudyItem[]
     title: 'Últimas Tarefas' | 'Próximas Tarefas'
 }
 
@@ -28,6 +23,6 @@ export function TasksList({ tasks, title }: TasksListProps) {
                     <li>Nenhuma tarefa encontrada.</li>
                 )}
             </ul>
-
-        </section>)
+        </section>
+    )
 }
