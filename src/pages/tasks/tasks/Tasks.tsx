@@ -27,6 +27,11 @@ export function Tasks() {
 
     const navigate = useNavigate()
 
+    const filteredTasks = tasks.filter((task) =>
+        task.title.toLowerCase().includes(search.toLowerCase()) ||
+        task.description.toLowerCase().includes(search.toLowerCase())
+    )
+
 
     return (
         <div className="tasksContainer">
@@ -42,21 +47,26 @@ export function Tasks() {
             </header>
 
             <div className="search">
-                <input 
-                    type="text" 
-                    placeholder='Pesquisar tarefa...' 
+                <input
+                    type="text"
+                    placeholder='Pesquisar tarefa...'
                     value={search}
                     onChange={(e) => setSearch(e.target.value)}
                 />
             </div>
 
             <main className="tasksList">
-                {tasks.filter((task) => 
-                    task.title.toLowerCase().includes(search.toLowerCase()) ||
-                    task.description.toLowerCase().includes(search.toLowerCase())
-                ).map((task) => (
+                {filteredTasks.map((task) => (
                     <TaskCard key={task.id} task={task} />
-                ))} {!tasks.length && <p className='noTasks'>Nenhuma tarefa encontrada</p>}
+                ))}
+
+                {filteredTasks.length === 0 && (
+                    <p className="noTasks">
+                        {search
+                            ? "🔍 Nenhuma tarefa encontrada para esta pesquisa."
+                            : "📋 Você ainda não possui tarefas."}
+                    </p>
+                )}
             </main>
         </div>
     )
