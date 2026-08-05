@@ -1,3 +1,4 @@
+import { useNavigate } from 'react-router-dom'
 import { deleteStudy, updateStudyStatus } from '../../../services/studies'
 import { notify } from '../../../services/toast'
 import type { StudyItem } from '../../../types/study'
@@ -41,6 +42,8 @@ export function TaskCard({ task }: TaskCardProps) {
         }
     }
 
+    const navigate = useNavigate()
+
     return (
         <article className={`taskCard ${task.status === 'done' ? 'completed': '' }`}>
             <div className="taskInfo">
@@ -54,7 +57,9 @@ export function TaskCard({ task }: TaskCardProps) {
             </div>
 
             <div className="taskActions">
-                <button type='button'>Editar</button>
+                <button type='button' onClick={() => navigate(`/tasks/edit/${task.id}`)}>
+                    Editar
+                </button>
                 <button type='button' onClick={handleDeleteTask}>
                     Excluir
                 </button>
