@@ -115,7 +115,7 @@ export function Home() {
               tasks={nextTasks}
             />
           ) : (
-            <div className="noTasks">
+            <div className="homeEmptyState">
               <span className="emptyIcon"><CheckCircle2 size={22} /></span>
               <div><strong>Tudo em dia</strong><p>Você não tem tarefas pendentes.</p></div>
             </div>
@@ -133,7 +133,7 @@ export function Home() {
               tasks={latestTasks}
             />
           ) : (
-            <div className="noTasks">
+            <div className="homeEmptyState">
               <span className="emptyIcon"><ClipboardList size={22} /></span>
               <div><strong>Seu quadro começa aqui</strong><p>Crie sua primeira tarefa para acompanhar seu progresso.</p></div>
             </div>

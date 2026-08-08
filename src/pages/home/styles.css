@@ -155,21 +155,28 @@
     min-width: 0;
 }
 
-.noTasks {
+.homeEmptyState {
     min-height: 145px;
     display: flex;
+    flex-direction: column;
     align-items: center;
-    gap: 14px;
+    justify-content: center;
+    gap: 10px;
     color: #64748b;
+    text-align: center;
 }
 
-.noTasks strong {
+.homeEmptyState > div {
+    max-width: 280px;
+}
+
+.homeEmptyState strong {
     display: block;
     color: #1e293b;
     margin-bottom: 5px;
 }
 
-.noTasks p {
+.homeEmptyState p {
     font-size: .9rem;
 }
 
