@@ -9,11 +9,13 @@ import { ArrowUpRight, House, Info, ListTodo, Menu, User } from "lucide-react";
 import { useState } from "react";
 
 export function Layout() {
-  const [isOpen, setIsOpen] = useState(true);
+  const [isOpen, setIsOpen] = useState(() =>
+    typeof window === "undefined" || window.innerWidth > 768,
+  );
 
-  const { appName, userName } = useAppContext();
+  const { appName } = useAppContext();
   const { user } = useAuth();
-  const currentUserName = user?.name || userName;
+  const currentUserName = user?.name || "Usuário";
 
   const rotas = [
     {

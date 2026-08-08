@@ -4,7 +4,6 @@ import { createContext, useContext, type ReactNode } from 'react'
 
 type AppContextType = {
   appName: string,
-  userName:string
 }
 
 const AppContext = createContext<AppContextType | undefined>(undefined)
@@ -12,7 +11,6 @@ const AppContext = createContext<AppContextType | undefined>(undefined)
 export function AppProvider({ children }: { children: ReactNode }) {
   const value: AppContextType = {
     appName: 'StudyFlow',
-    userName:"Gabriel"
   }
 
   return <AppContext.Provider value={value}>{children}</AppContext.Provider>

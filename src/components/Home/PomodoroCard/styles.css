@@ -34,10 +34,12 @@
 .buttons {
   display: flex;
   gap: 12px;
+  flex-wrap: wrap;
 }
 
 .buttons button {
   flex: 1;
+  min-width: 90px;
 
   padding: 12px;
 

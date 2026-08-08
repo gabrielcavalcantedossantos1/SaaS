@@ -4,7 +4,6 @@ import { Link } from "react-router-dom";
 import { PomodoroCard } from "../../components/Home/PomodoroCard/PomodoroCard";
 import { SummaryCard } from "../../components/Home/SummaryCard/SummaryCard";
 import { TasksList } from "../../components/Home/TasksList/TasksList";
-import { useAppContext } from "../../context/AppContext";
 import { useAuth } from "../../context/AuthContent";
 import "./styles.css";
 
@@ -16,7 +15,6 @@ import {
 
 export function Home() {
   const { user } = useAuth();
-  const { userName } = useAppContext();
 
   const [tasks, setTasks] = useState<StudyItem[]>([]);
 
@@ -78,7 +76,7 @@ export function Home() {
       <header className="homeHeader">
         <div>
           <span className="homeEyebrow"><Sparkles size={15} /> Seu espaço de foco</span>
-          <h1>Olá, {userName}!</h1>
+          <h1>Olá, {user?.name || "estudante"}!</h1>
           <p className="homeDate"><CalendarDays size={16} /> {displayDate}</p>
           <p className="homeSubtitle">Um passo de cada vez. O que você quer tirar do papel hoje?</p>
         </div>

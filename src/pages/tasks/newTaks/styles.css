@@ -1,4 +1,5 @@
 .newTaskContainer {
+  width: 100%;
   max-width: 800px;
   margin: 0 auto;
 }
@@ -77,6 +78,7 @@
 }
 
 .actions button {
+  flex: 1 1 180px;
   padding: 12px 24px;
   border-radius: 10px;
   border: none;
@@ -114,7 +116,19 @@
 }
 
 @media (max-width: 768px) {
+  .newTaskContainer form {
+    padding: 20px;
+  }
+
   .formRow {
     grid-template-columns: 1fr;
+  }
+
+  .actions {
+    flex-direction: column-reverse;
+  }
+
+  .actions button {
+    width: 100%;
   }
 }
