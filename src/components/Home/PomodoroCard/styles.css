@@ -1,18 +1,20 @@
 .pomodoroCard {
   display: flex;
   flex-direction: column;
-  gap: 24px;
+  gap: 20px;
 
+  min-height: 100%;
   padding: 24px;
 
+  border: 1px solid #fed7aa;
   border-radius: 16px;
-
-  background: #ffffff;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+  background: linear-gradient(145deg, #fff7ed 0%, #ffedd5 100%);
+  box-shadow: 0 8px 22px rgba(234, 88, 12, .1);
 }
 
 .pomodoroCard h2 {
-  text-align: center;
+  color: #9a3412;
+  font-size: 1.05rem;
 }
 
 .timer {
@@ -22,7 +24,8 @@
 }
 
 .timer time {
-  font-size: 4rem;
+  color: #431407;
+  font-size: clamp(3rem, 5vw, 4.2rem);
   font-weight: bold;
 
   letter-spacing: 4px;
@@ -39,7 +42,7 @@
   padding: 12px;
 
   border: none;
-  border-radius: 8px;
+  border-radius: 9px;
 
   cursor: pointer;
 
@@ -49,7 +52,7 @@
 }
 
 .start{
-    background:#22c55e;
+  background:#ea580c;
     color:white;
 }
 
@@ -58,7 +61,7 @@
 }
 
 .pause{
-    background:#f59e0b;
+  background:#f59e0b;
     color:white;
 }
 

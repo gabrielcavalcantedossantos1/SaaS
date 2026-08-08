@@ -5,7 +5,7 @@ import { useAuth } from "../../context/AuthContent";
 // style
 import "./style.css";
 
-import { House, Info, ListTodo, Menu, User } from "lucide-react";
+import { ArrowUpRight, House, Info, ListTodo, Menu, User } from "lucide-react";
 import { useState } from "react";
 
 export function Layout() {
@@ -115,10 +115,18 @@ export function Layout() {
 
 
         {/* Footer */}
-        <footer>
-          <p>
-            &copy; 2026 {appName}. Todos os direitos reservados.
-          </p>
+        <footer className="layoutFooter">
+          <div className="footerBrand">
+            <span className="footerMark" />
+            <strong>{appName}</strong>
+            <span className="footerDivider" />
+            <span>Seu espaço de foco</span>
+          </div>
+
+          <div className="footerMeta">
+            <span>&copy; 2026</span>
+            <Link to="/about">Sobre o app <ArrowUpRight size={14} /></Link>
+          </div>
         </footer>
 
       </div>
