@@ -1,4 +1,77 @@
-/* ================= FILTROS ================= */
+.tasksContainer {
+    width: 100%;
+    max-width: 1120px;
+    margin: 0 auto;
+}
+
+.tasksHeader {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 24px;
+    margin-bottom: 24px;
+}
+
+.tasksHeader h1 {
+    color: #172554;
+    font-size: clamp(1.8rem, 4vw, 2.4rem);
+    letter-spacing: -.03em;
+}
+
+.tasksHeader p {
+    margin-top: 7px;
+    color: #64748b;
+}
+
+.newTaskButton {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    flex: 0 0 auto;
+    padding: 13px 16px;
+    border: 0;
+    border-radius: 10px;
+    color: #fff;
+    background: linear-gradient(135deg, #1d4ed8, #2563eb);
+    box-shadow: 0 8px 18px rgba(37, 99, 235, .22);
+    cursor: pointer;
+    font-size: .9rem;
+    font-weight: 800;
+    transition: transform .2s ease, box-shadow .2s ease;
+}
+
+.newTaskButton:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 12px 24px rgba(37, 99, 235, .3);
+}
+
+.newTaskButton:active {
+    transform: translateY(0);
+}
+
+.search input {
+    width: 100%;
+    padding: 13px 16px;
+    border: 1px solid #dbe3ef;
+    border-radius: 10px;
+    background: #fff;
+    color: #1e293b;
+    font-size: .9rem;
+}
+
+.search input:focus {
+    outline: none;
+    border-color: #2563eb;
+    box-shadow: 0 0 0 3px rgba(37, 99, 235, .12);
+}
+
+.tasksList {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+/* Filtros */
 
 .filters {
     display: grid;
@@ -26,6 +99,19 @@
 .filters select:focus {
     outline: none;
     border-color: #2563eb;
+}
+
+@media (max-width: 600px) {
+    .tasksHeader {
+        align-items: stretch;
+        flex-direction: column;
+        gap: 16px;
+    }
+
+    .newTaskButton {
+        width: 100%;
+        justify-content: center;
+    }
 }
 
 /* Responsivo */

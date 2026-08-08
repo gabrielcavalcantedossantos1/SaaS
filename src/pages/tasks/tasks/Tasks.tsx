@@ -6,6 +6,7 @@ import { listenToStudiesByUser } from '../../../services/studies'
 import type { StudyItem } from '../../../types/study'
 import { useAuth } from '../../../context/AuthContent'
 import { useEffect, useState } from 'react'
+import { ArrowRight, Plus } from 'lucide-react'
 
 export function Tasks() {
 
@@ -80,8 +81,10 @@ export function Tasks() {
                     <p>Organize seus estudos e acompanhe seu progresso</p>
                 </div>
 
-                <button type='button' onClick={() => navigate('/tasks/new')}>
-                    + Nova Tarefa
+                <button className="newTaskButton" type='button' onClick={() => navigate('/tasks/new')}>
+                    <Plus size={18} />
+                    <span>Nova tarefa</span>
+                    <ArrowRight size={17} />
                 </button>
             </header>
 
