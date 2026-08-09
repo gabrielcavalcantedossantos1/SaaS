@@ -103,7 +103,7 @@ export function Layout() {
           <div className="headerContent">
             <div className="userInfo">
               <div className="userAvatar">
-                <User />
+                <User size={30} strokeWidth={2.25} aria-hidden="true" />
               </div>
 
               <div className="userDetails">
@@ -119,7 +119,7 @@ export function Layout() {
               aria-label="Sair da conta"
               title="Sair"
             >
-              <LogOut size={18} aria-hidden="true" />
+              <LogOut size={40} strokeWidth={2.25} aria-hidden="true" />
               <span>Sair</span>
             </button>
           </div>

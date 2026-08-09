@@ -178,6 +178,11 @@ aside ul li {
   flex-shrink: 0;
 }
 
+.userAvatar svg {
+  width: 30px;
+  height: 30px;
+}
+
 .userDetails {
   display: flex;
   flex-direction: row;
@@ -200,7 +205,7 @@ aside ul li {
   display: inline-flex;
   align-items: center;
   gap: 8px;
-  padding: 9px 12px;
+  padding: 10px 14px;
   border: 1px solid #fecaca;
   border-radius: 10px;
   background: #fff;
@@ -411,4 +416,15 @@ main {
 .content > header button svg {
   width: 24px;
   height: 24px;
+}
+
+.content > header .logoutButton svg {
+  width: 32px !important;
+  height: 32px !important;
+}
+
+.content > header .logoutButton {
+  width: auto;
+  height: auto;
+  padding: 10px 14px;
 }
