@@ -196,6 +196,39 @@ aside ul li {
   color: #0f172a;
 }
 
+.logoutButton {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 9px 12px;
+  border: 1px solid #fecaca;
+  border-radius: 10px;
+  background: #fff;
+  color: #b91c1c;
+  font: inherit;
+  font-size: 0.85rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition:
+    background-color 0.2s ease,
+    border-color 0.2s ease;
+}
+
+.logoutButton:hover:not(:disabled) {
+  background: #fef2f2;
+  border-color: #fca5a5;
+}
+
+.logoutButton:focus-visible {
+  outline: 3px solid rgba(239, 68, 68, 0.25);
+  outline-offset: 2px;
+}
+
+.logoutButton:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
 /* main */
 
 main {
@@ -217,7 +250,7 @@ main {
   background: #ffffff;
   border-top: 1px solid #e2e8f0;
   color: #64748b;
-  font-size: .8rem;
+  font-size: 0.8rem;
 }
 
 .footerBrand,
@@ -234,7 +267,7 @@ main {
 
 .footerBrand strong {
   color: #1e293b;
-  font-size: .85rem;
+  font-size: 0.85rem;
 }
 
 .footerBrand > span:last-child {
@@ -319,6 +352,10 @@ main {
     max-width: 100px;
   }
 
+  .logoutButton span {
+    display: none;
+  }
+
   .contentSidebarClosed {
     padding-left: 0;
   }
@@ -329,7 +366,6 @@ main {
     gap: 10px;
     padding: 16px 22px;
   }
-
 }
 
 /* svg */
