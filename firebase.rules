@@ -1,0 +1,28 @@
+rules_version = '2';
+
+service cloud.firestore {
+  match /databases/{database}/documents {
+
+    match /studies/{studyId} {
+
+      // Ler apenas os próprios estudos
+      allow read: if request.auth != null
+                  && resource.data.userId == request.auth.uid;
+
+      // Criar apenas estudos pertencentes ao usuário autenticado
+      allow create: if request.auth != null
+                    && request.resource.data.userId == request.auth.uid;
+
+      // Atualizar apenas os próprios estudos
+      // userId e createdAt não podem ser alterados
+      allow update: if request.auth != null
+                    && resource.data.userId == request.auth.uid
+                    && request.resource.data.userId == resource.data.userId
+                    && request.resource.data.createdAt == resource.data.createdAt;
+
+      // Excluir apenas os próprios estudos
+      allow delete: if request.auth != null
+                    && resource.data.userId == request.auth.uid;
+    }
+  }
+}
