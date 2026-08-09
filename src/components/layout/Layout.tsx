@@ -1,20 +1,28 @@
-import { NavLink, Outlet, Link } from "react-router-dom";
+import { NavLink, Outlet, Link, useNavigate } from "react-router-dom";
 import { useAppContext } from "../../context/AppContext";
 import { useAuth } from "../../context/AuthContent";
 
 // style
 import "./style.css";
 
-import { ArrowUpRight, House, Info, ListTodo, Menu, User } from "lucide-react";
+import {
+  ArrowUpRight,
+  House,
+  Info,
+  ListTodo,
+  LogOut,
+  Menu,
+  User,
+} from "lucide-react";
 import { useState } from "react";
 
 export function Layout() {
-  const [isOpen, setIsOpen] = useState(() =>
-    typeof window === "undefined" || window.innerWidth > 768,
+  const [isOpen, setIsOpen] = useState(
+    () => typeof window === "undefined" || window.innerWidth > 768,
   );
 
   const { appName } = useAppContext();
-  const { user } = useAuth();
+  const { user, logout, loading } = useAuth();
   const currentUserName = user?.name || "Usuário";
 
   const rotas = [
@@ -37,13 +45,25 @@ export function Layout() {
       label: "Sobre",
     },
   ];
+  const navigate = useNavigate();
+
+  async function handleLogout() {
+    // verificar se o usuario quer mesmo sair
+    const confirmLogout = window.confirm("Tem certeza que deseja sair?");
+    if (!confirmLogout) return;
+
+    try {
+      await logout();
+      navigate("/login");
+    } catch (error) {
+      console.log(error);
+    }
+  }
 
   return (
     <div className="layout">
-
       {/* Sidebar */}
       <aside className={isOpen ? "sidebarOpen" : "sidebarClosed"}>
-
         <Link to="/" className="sideLogo">
           {isOpen && appName}
         </Link>
@@ -54,43 +74,28 @@ export function Layout() {
               <li key={rota.id}>
                 <NavLink
                   to={rota.path}
-                  className={({ isActive }) =>
-                    isActive ? "active" : "btn"
-                  }
+                  className={({ isActive }) => (isActive ? "active" : "btn")}
                 >
                   {rota.icon}
 
-                  {isOpen && (
-                    <span>
-                      {rota.label}
-                    </span>
-                  )}
+                  {isOpen && <span>{rota.label}</span>}
                 </NavLink>
               </li>
             ))}
           </ul>
         </nav>
-
       </aside>
-
 
       {/* Conteúdo */}
       <div
         className={
-          isOpen
-            ? "content contentSidebarOpen"
-            : "content contentSidebarClosed"
+          isOpen ? "content contentSidebarOpen" : "content contentSidebarClosed"
         }
       >
-
         {/* Header */}
         <header>
-
           <div className="headerLeft">
-            <button
-              type="button"
-              onClick={() => setIsOpen(!isOpen)}
-            >
+            <button type="button" onClick={() => setIsOpen(!isOpen)}>
               <Menu />
             </button>
           </div>
@@ -105,16 +110,25 @@ export function Layout() {
                 <span className="userName">{currentUserName}</span>
               </div>
             </div>
+
+            <button
+              type="button"
+              className="logoutButton"
+              onClick={handleLogout}
+              disabled={loading}
+              aria-label="Sair da conta"
+              title="Sair"
+            >
+              <LogOut size={18} aria-hidden="true" />
+              <span>Sair</span>
+            </button>
           </div>
-
         </header>
-
 
         {/* Páginas */}
         <main>
           <Outlet />
         </main>
-
 
         {/* Footer */}
         <footer className="layoutFooter">
@@ -127,12 +141,12 @@ export function Layout() {
 
           <div className="footerMeta">
             <span>&copy; 2026</span>
-            <Link to="/about">Sobre o app <ArrowUpRight size={14} /></Link>
+            <Link to="/about">
+              Sobre o app <ArrowUpRight size={14} />
+            </Link>
           </div>
         </footer>
-
       </div>
-
     </div>
   );
 }
